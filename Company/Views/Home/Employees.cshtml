@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Employees";
+
+    //YAPILACAKLAR
+
+    //Breadcrumb ekle
+    //Table yerine Grid ekle
+    //Modal ekle -- Yeni çalışan ekleye basınca çıksın
+    //Modal güncelle, bak -- çıkınca gelsin
+    //Silme -- evet, vazgeç
+
+    //Diğer sayfa lazy loading
+
+}
+
+<br />
+<br />
+<button class="form-button" onclick="location.href='@Url.Action("NewEmployee", "Home")'"><i class="fa fa-plus"></i> Yeni Çalışan Ekle</button>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th> Adı </th>
+        <th> Bölümü </th>
+        <th> </th>
+    </tr>
+    @foreach (var row in Model)
+    {
+        <tr>
+            <td> @row.Name</td>
+            <td> @row.Dept</td>
+            <td>
+                <a href="#"><i class='fa fa-eye'></i></a>
+                <a href="@Url.Action("EditEmployee", "Home", new { @Id = row.Id })"><i class='fa fa-edit'></i></a>
+                <a onclick="return confirm('@row.Name adlı kayıdı silmek istediğinize emin misiniz?');" href="@Url.Action("DeleteEmployee", "Home", new { @Id = row.Id })"><i class='fa fa-trash'></i></a>
+            </td>
+        </tr>
+    }
+
+</table>

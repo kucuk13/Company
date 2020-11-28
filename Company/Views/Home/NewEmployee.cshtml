@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "İşe Al";
+}
+
+@using (Html.BeginForm("InsertEmployee", "Home", FormMethod.Post))
+{
+    <br /> <br />
+    <p>Name: </p> @Html.TextBox("Name", "");
+    <br /> <br />
+    <p>Department: </p> @Html.TextBox("Dept", "");
+    <br /> <br />
+    <button class="form-button" type="submit"><i class="fa fa-plus"></i> Ekle </button>
+}

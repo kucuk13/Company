@@ -1,0 +1,30 @@
+﻿.mid {
+    text-align: center;
+}
+.row {
+    display: table;
+    padding: 10px;
+    margin-right: 10px;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+    margin-right: 10px;
+    display: table-cell;
+}
+
+.form-button {
+    background-color: dodgerblue;
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: none;
+    color: white;
+}
+.form-button:hover {
+    background-color: blue;
+}
+

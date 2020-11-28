@@ -1,0 +1,25 @@
+﻿@{
+    @model Employee
+    ViewBag.Title = "Çalışan Bilgileri Güncelleme";
+
+    List<string> depts = new List<string>();
+    depts.Add("ARGE");
+    depts.Add("Game");
+    depts.Add("Mobile");
+}
+
+<br />
+<br />
+@using (Html.BeginForm("UpdateEmployee", "Home", FormMethod.Post))
+{
+    <p>Adı:</p>
+    @Html.TextBoxFor(m => m.Name)
+    <br /><br />
+    <p>Yeni Bölümü: </p>
+    @Html.DropDownList("Dept",
+        new SelectList(depts),
+        "Bölüm Seç"
+    );
+    <br /><br />
+    <button class="form-button" type="submit"><i class="fa fa-refresh"></i> Güncelle </button>
+}
