@@ -12,6 +12,7 @@
 <br />
 @using (Html.BeginForm("UpdateEmployee", "Home", FormMethod.Post))
 {
+    @Html.HiddenFor(m => m.Id)
     <p>Adı:</p>
     @Html.TextBoxFor(m => m.Name)
     <br /><br />

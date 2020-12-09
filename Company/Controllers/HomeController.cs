@@ -19,25 +19,6 @@ namespace Company.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        
-        public ActionResult Employees()
-        {
             List<Employee> employees = new List<Employee>();
             using (var dbContext = new CompanyDbEntities())
             {
@@ -47,7 +28,7 @@ namespace Company.Controllers
             return View(employees);
         }
 
-        public ActionResult NewEmployee()
+        public ActionResult New()
         {
             return View();
         }
@@ -76,10 +57,10 @@ namespace Company.Controllers
 
             }
 
-            return RedirectToAction("Employees");
+            return RedirectToAction("Index");
         }
 
-        public ActionResult EditEmployee(int Id)
+        public ActionResult Edit(int Id)
         {
             Employee employee;
             using (var dbContext = new CompanyDbEntities())
@@ -89,18 +70,19 @@ namespace Company.Controllers
             return View(employee);
         }
 
-        public ActionResult UpdateEmployee(string Name, String Dept)
+        public ActionResult UpdateEmployee(Employee criteria)
         {
-            if (Name == "")
-                return RedirectToAction("EditEmployee");
-            if (Dept == "")
-                return RedirectToAction("EditEmployee");
+            if (criteria.Name == "")
+                return RedirectToAction("Edit");
+            if (criteria.Dept == "")
+                return RedirectToAction("Edit");
             try
             {
                 using (var dbContext = new CompanyDbEntities())
                 {
-                    Employee employee = dbContext.Employees.Where(obj => obj.Name == Name).FirstOrDefault();
-                    employee.Dept = Dept;
+                    Employee employee = dbContext.Employees.Where(obj => obj.Id == criteria.Id).FirstOrDefault();
+                    employee.Name = criteria.Name;
+                    employee.Dept = criteria.Dept;
                     dbContext.Entry(employee).State = EntityState.Modified;
                     dbContext.SaveChanges();
                 }
@@ -109,7 +91,7 @@ namespace Company.Controllers
             {
 
             }
-            return RedirectToAction("Employees");
+            return RedirectToAction("Index");
         }
 
         public ActionResult DeleteEmployee(int Id)
@@ -119,8 +101,7 @@ namespace Company.Controllers
                 using (var dbContext = new CompanyDbEntities())
                 {
                     Employee employee = dbContext.Employees.Where(obj => obj.Id == Id).FirstOrDefault();
-                    employee.IsDeleted = true;
-                    dbContext.Entry(employee).State = EntityState.Modified;
+                    dbContext.Employees.Remove(employee);
                     dbContext.SaveChanges();
                 }
             }
@@ -128,7 +109,7 @@ namespace Company.Controllers
             {
 
             }
-            return RedirectToAction("Employees");
+            return RedirectToAction("Index");
         }
 
     }
