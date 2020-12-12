@@ -1,41 +1,53 @@
 ﻿@{
     ViewBag.Title = "Employees";
 
-    //YAPILACAKLAR
-
-    //Breadcrumb ekle
-    //Table yerine Grid ekle
     //Modal ekle -- Yeni çalışan ekleye basınca çıksın
     //Modal güncelle, bak -- çıkınca gelsin
     //Silme -- evet, vazgeç
 
     //Diğer sayfa lazy loading
 
+    //https://getbootstrap.com/docs/4.3/getting-started/download/
+    //https://www.w3schools.com/bootstrap/bootstrap_grid_examples.asp
 }
 
-<br />
-<br />
-<button class="form-button" onclick="location.href='@Url.Action("New", "Home")'"><i class="fa fa-plus"></i> Yeni Çalışan Ekle</button>
-<br />
-<br />
-
-<table class="table">
-    <tr>
-        <th> Adı </th>
-        <th> Bölümü </th>
-        <th> </th>
-    </tr>
-    @foreach (var row in Model)
-    {
-        <tr>
-            <td> @row.Name</td>
-            <td> @row.Dept</td>
-            <td>
-                <a href="#"><i class='fa fa-eye'></i></a>
-                <a href="@Url.Action("Edit", "Home", new { @Id = row.Id })"><i class='fa fa-edit'></i></a>
-                <a onclick="return confirm('@row.Name adlı kayıdı silmek istediğinize emin misiniz?');" href="@Url.Action("DeleteEmployee", "Home", new { @Id = row.Id })"><i class='fa fa-trash'></i></a>
-            </td>
-        </tr>
-    }
-
-</table>
+<div class="row">
+    <div class="col-sm-2">
+        Menü
+    </div>
+    <div class="col-sm-10">
+        <button class="form-button" onclick="location.href='@Url.Action("New", "Home")'"><i class="fa fa-plus"></i> Yeni Çalışan Ekle</button>
+        <br />
+        <br />
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Adı</th>
+                        <th scope="col">Bölümü</th>
+                        <th scope="col">İşlemler</th>
+                    </tr>
+                </thead>
+                @{ 
+                    var i = 0;
+                }
+                @foreach (var row in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <th scope="row">@(++i)</th>
+                            <td> @row.Name</td>
+                            <td> @row.Dept</td>
+                            <td>
+                                <a href="#"><i class='fa fa-eye'></i></a>
+                                <a href="@Url.Action("Edit", "Home", new { @Id = row.Id })"><i class='fa fa-edit'></i></a>
+                                <a onclick="return confirm('@row.Name adlı kayıdı silmek istediğinize emin misiniz?');" href="@Url.Action("DeleteEmployee", "Home", new { @Id = row.Id })"><i class='fa fa-trash'></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>
